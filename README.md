@@ -47,8 +47,8 @@
 
 Настройте подключение к базе данных:
 
-    В папке the-final-project/backend/src/ создайте файл .env.
-    Добавьте в него строку с вашей ссылкой на MongoDB:
+В папке the-final-project/backend/src/ создайте файл .env
+Добавьте в него строку с вашей ссылкой на MongoDB, вашим email и паролем:
 
         MONGO_URI=ваша_ссылка_на_bазу
         JWT_SECRET=ваш jwt secret
