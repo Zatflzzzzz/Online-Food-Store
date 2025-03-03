@@ -1,80 +1,139 @@
-import { Router } from 'express';
-//import { food_array } from '../data';
+import {Router} from 'express';
 import asyncHandler from 'express-async-handler';
-import { FoodModel } from '../models/food.model';
-import { HTTP_BAD_REQUEST } from '../constants/http.status';
+import {PrismaClient} from '@prisma/client';
+import {HTTP_BAD_REQUEST} from '../constants/http.status';
 
 const router = Router();
+const prisma = new PrismaClient();
 
-// router.get("/seed", asyncHandler(async (req, res) => {
-//     const foodsCount = await FoodModel.countDocuments();
-//     if (foodsCount > 0) {
-//       res.send("Seed is already done!");
-//       return;
-//     }
-
-//     await FoodModel.create(food_array);
-//     res.send("Seed Is Done!");
-//   }
-// ));
-
+// Получение всех блюд
 router.get("/", asyncHandler(async (req, res) => {
-    const foods = await FoodModel.find();
+    const foods = await prisma.food.findMany();
     res.send(foods);
-  }
-));
+}));
 
+// Поиск блюд по названию
 router.get("/search/:searchTerm", asyncHandler(async (req, res) => {
-    const searchRegex = new RegExp(req.params.searchTerm, 'i');
-    const foods = await FoodModel.find({ name: { $regex: searchRegex } });
-    res.send(foods);
-  }
-));
+    const searchTerm = req.params.searchTerm;
 
+    const foods = await prisma.food.findMany({
+        where: {
+            name: { contains: searchTerm, mode: 'insensitive' },
+        },
+    });
+
+    res.send(foods);
+}));
+
+// Получение всех тегов
 router.get("/tags", asyncHandler(async (req, res) => {
-    const tags = await FoodModel.aggregate([
-      { $unwind: '$tags' },
-      {
-        $group: {
-          _id: '$tags',
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $project: {
-          _id: 0,
-          name: '$_id',
-          count: '$count'
-        }
-      }
-    ]).sort({ count: -1 });
+    const tags = await prisma.food.groupBy({
+        by: ['tags'],
+        _count: {
+            tags: true,
+        },
+    });
 
     const all = {
-      name: 'All',
-      count: await FoodModel.countDocuments()
+        name: 'All',
+        count: await prisma.food.count(),
     };
 
-    tags.unshift(all);
-    res.send(tags);
-  }
-));
+    const formattedTags = tags.map(tag => ({
+        name: tag.tags[0], // Предполагаем, что tags - это массив
+        count: tag._count.tags,
+    }));
 
-router.get("/tag/:tagName",asyncHandler(async (req, res) => {
-      console.log("12")
-     const foods = await FoodModel.find({tags: req.params.tagName})
-     res.send(foods);
-   }
- ))
+    formattedTags.unshift(all);
+    res.send(formattedTags);
+}));
 
+// Получение блюд по тегу
+router.get("/tag/:tagName", asyncHandler(async (req, res) => {
+    const tagName = req.params.tagName;
+
+    const foods = await prisma.food.findMany({
+        where: {
+            tags: { has: tagName },
+        },
+    });
+
+    res.send(foods);
+}));
+
+// Получение блюда по ID
 router.get("/:foodId", asyncHandler(async (req, res) => {
-    const food = await FoodModel.findById(req.params.foodId);
+    const foodId = req.params.foodId;
 
-    if(!food){
-      res.status(HTTP_BAD_REQUEST).send("Food with this id is not found")
+    const food = await prisma.food.findUnique({
+        where: { id: foodId },
+    });
+
+    if (!food) {
+        res.status(HTTP_BAD_REQUEST).send("Food not found");
+        return;
     }
 
     res.send(food);
-  }
-));
+}));
+
+// Добавление нового блюда
+router.post("/addDish", asyncHandler(async (req, res) => {
+    const { name, price, tags, favorite, stars, imageUrl, origins, cookTime } = req.body;
+
+    const existingDish = await prisma.food.findFirst({ where: { name } });
+
+    if (existingDish) {
+        res.status(HTTP_BAD_REQUEST).send('This dish is already on the menu');
+        return;
+    }
+
+    const newDish = await prisma.food.create({
+        data: {
+            name,
+            price,
+            tags,
+            favorite,
+            stars,
+            imageUrl,
+            origins,
+            cookTime,
+        },
+    });
+
+    res.send(newDish);
+}));
+
+// Редактирование данных блюда
+router.put("/editFoodData/:id", asyncHandler(async (req, res) => {
+    const foodId = req.params.id;
+    const foodData = req.body;
+
+    const updatedFood = await prisma.food.update({
+        where: { id: foodId },
+        data: foodData,
+    });
+
+    if (!updatedFood) {
+        res.status(HTTP_BAD_REQUEST).send("Dish is not found");
+        return;
+    }
+
+    res.send(updatedFood);
+}));
+
+// Удаление блюда
+router.delete("/deleteFood/:id", asyncHandler(async (req, res) => {
+    const foodId = req.params.id;
+
+    const deletedFood = await prisma.food.delete({ where: { id: foodId } });
+
+    if (!deletedFood) {
+        res.status(HTTP_BAD_REQUEST).send("Food is not found");
+        return;
+    }
+
+    res.send();
+}));
 
 export default router;

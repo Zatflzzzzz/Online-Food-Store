@@ -1,89 +1,106 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import asyncHandler from 'express-async-handler';
-import { Food, FoodModel } from '../models/food.model';
-import { HTTP_BAD_REQUEST } from '../constants/http.status';
-import { UserModel } from '../models/user.model';
+import {PrismaClient} from '@prisma/client';
+import {HTTP_BAD_REQUEST} from '../constants/http.status';
 
 const router = Router();
+const prisma = new PrismaClient();
 
-router.post("/addDish", asyncHandler(async (req:any,res) => {
-    const {name, price, tags, favorite, stars, imageUrl, origins, cookTime} = req.body;
+// Добавление нового блюда
+router.post("/addDish", asyncHandler(async (req, res) => {
+    const { name, price, tags, favorite, stars, imageUrl, origins, cookTime } = req.body;
 
-    const dish = await FoodModel.findOne({name});
+    // Проверяем, существует ли блюдо с таким именем
+    const existingDish = await prisma.food.findFirst({ where: { name } });
 
-    if(dish){
+    if (existingDish) {
         res.status(HTTP_BAD_REQUEST).send('This dish is already on the menu');
         return;
     }
 
-    const newDish: Food = {
-        id:"",
-        name,
-        price,
-        tags,
-        favorite,
-        stars,
-        imageUrl,
-        origins,
-        cookTime,
-    }
+    // Создаем новое блюдо
+    const newDish = await prisma.food.create({
+        data: {
+            name,
+            price,
+            tags,
+            favorite,
+            stars,
+            imageUrl,
+            origins,
+            cookTime,
+        },
+    });
 
-    await FoodModel.create(newDish);
-    res.send();
-}))
+    res.send(newDish);
+}));
 
-router.put("/editDataUser/:id", asyncHandler(async (req:any,res) => {
+// Редактирование данных пользователя
+router.put("/editDataUser/:id", asyncHandler(async (req, res) => {
     const userId = req.params.id;
-    const updateData = req.body
+    const updateData = req.body;
 
-    const user = await UserModel.findByIdAndUpdate(userId, updateData, {new:false})
+    // Обновляем данные пользователя
+    const updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: updateData,
+    });
 
-    if(!user){
-        res.status(HTTP_BAD_REQUEST).send("Sorry, an unexpected error has occurred")
-        return
+    if (!updatedUser) {
+        res.status(HTTP_BAD_REQUEST).send("Sorry, an unexpected error has occurred");
+        return;
     }
 
-    res.send(user);
-}))
+    res.send(updatedUser);
+}));
 
-router.put("/editFoodData/:id" ,asyncHandler(async (req:any,res) => {
+// Редактирование данных блюда
+router.put("/editFoodData/:id", asyncHandler(async (req, res) => {
     const foodId = req.params.id;
-    const foodData = req.body
+    const foodData = req.body;
 
-    const food = await FoodModel.findByIdAndUpdate(foodId, foodData, {new:false})
+    // Обновляем данные блюда
+    const updatedFood = await prisma.food.update({
+        where: { id: foodId },
+        data: foodData,
+    });
 
-    if(!food){
-        res.status(HTTP_BAD_REQUEST).send("Dish is not found")
-        return
+    if (!updatedFood) {
+        res.status(HTTP_BAD_REQUEST).send("Dish is not found");
+        return;
+    }
+
+    res.send(updatedFood);
+}));
+
+// Удаление блюда
+router.delete("/deleteFood/:id", asyncHandler(async (req, res) => {
+    const foodId = req.params.id;
+
+    // Удаляем блюдо
+    const deletedFood = await prisma.food.delete({ where: { id: foodId } });
+
+    if (!deletedFood) {
+        res.status(HTTP_BAD_REQUEST).send("Food is not found");
+        return;
     }
 
     res.send();
-}))
+}));
 
-router.delete("/deleteFood/:id",asyncHandler(async (req:any,res) => {
-    const foodId = req.params.id;
-
-    const food = await FoodModel.findByIdAndDelete(foodId);
-
-    if(!food){
-        res.status(HTTP_BAD_REQUEST).send("Food is not found")
-        return
-    }
-
-    res.send();
-}))
-
-router.delete("/deleteUserData/:id", asyncHandler(async (req:any,res) => {
+// Удаление пользователя
+router.delete("/deleteUserData/:id", asyncHandler(async (req, res) => {
     const userId = req.params.id;
 
-    const user = await UserModel.findByIdAndDelete(userId);
+    // Удаляем пользователя
+    const deletedUser = await prisma.user.delete({ where: { id: userId } });
 
-    if(!user){
-        res.status(HTTP_BAD_REQUEST).send("User is not found")
-        return
+    if (!deletedUser) {
+        res.status(HTTP_BAD_REQUEST).send("User is not found");
+        return;
     }
 
     res.send();
-}))
+}));
 
 export default router;

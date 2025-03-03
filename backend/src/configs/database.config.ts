@@ -1,11 +1,12 @@
-import {connect, ConnectOptions} from 'mongoose'
+import {PrismaClient} from '@prisma/client';
 
-export const dbConnect = ()=>{
-    connect(process.env.MONGO_URI!, {
-        useNewUrlParser:true,
-        useUnifiedTopology:true
-    } as ConnectOptions).then(
-        () => console.log("connect successfully"),
-        (error) => console.log(error)
-    )
-}
+const prisma = new PrismaClient();
+
+export const dbConnect = async () => {
+    try {
+        await prisma.$connect();
+        console.log("Database connected successfully");
+    } catch (error) {
+        console.error("Database connection error:", error);
+    }
+};
