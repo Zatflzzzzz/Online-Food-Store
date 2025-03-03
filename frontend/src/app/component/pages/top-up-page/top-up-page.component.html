@@ -1,0 +1,13 @@
+<div class="top-up-container">
+    <h2>Welcome, {{ currentUser.name }}</h2>
+    <p>Current Balance: {{ currentUser.balance | currency }}</p>
+  
+    <form (ngSubmit)="onTopUp()">
+      <label for="amount">Top-up Amount:</label>
+      <input type="number" id="amount" [(ngModel)]="topUpAmount" name="amount" required />
+      
+      <button type="submit">Top Up</button>
+    </form>
+  
+    <p *ngIf="message" class="message">{{ message }}</p>
+  </div>

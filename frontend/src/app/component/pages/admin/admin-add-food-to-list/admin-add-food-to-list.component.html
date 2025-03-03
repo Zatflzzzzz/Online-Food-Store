@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="details">
+      <app-title title="Add Food Item"></app-title>
+  
+      <form [formGroup]="foodForm" (ngSubmit)="submit()">
+        <text-input [control]="fc.name" [showErrorsWhen]="isSubmitted" type="text" label="Name"></text-input>
+  
+        <text-input [control]="fc.price" [showErrorsWhen]="isSubmitted" type="number" label="Price"></text-input>
+  
+        <text-input [control]="fc.tags" [showErrorsWhen]="isSubmitted" type="text" label="Tags (comma-separated)"></text-input>
+  
+        <text-input [control]="fc.stars" [showErrorsWhen]="isSubmitted" type="number" label="Stars"></text-input>
+  
+        <text-input [control]="fc.imageUrl" [showErrorsWhen]="isSubmitted" type="text" label="Image URL"></text-input>
+  
+        <text-input [control]="fc.origins" [showErrorsWhen]="isSubmitted" type="text" label="Origins (comma-separated)"></text-input>
+  
+        <text-input [control]="fc.cookTime" [showErrorsWhen]="isSubmitted" type="text" label="Cook Time"></text-input>
+  
+        <default-button></default-button>
+      </form>
+    </div>
+  </div>

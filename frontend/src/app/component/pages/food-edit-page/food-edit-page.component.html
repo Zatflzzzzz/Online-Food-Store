@@ -1,0 +1,27 @@
+<div class="edit-container" *ngIf="foodForm">
+    <div class="edit-details">
+        <h2 class="edit-title">Edit Food Item</h2>
+
+        <form [formGroup]="foodForm" (ngSubmit)="submit()">
+            <text-input [control]="fc.name" [showErrorsWhen]="isSubmitted" label="Name"></text-input>
+
+            <text-input [control]="fc.price" [showErrorsWhen]="isSubmitted" type="number" label="Price"></text-input>
+
+            <text-input [control]="fc.tags" [showErrorsWhen]="isSubmitted" label="Tags"></text-input>
+
+            <text-input [control]="fc.stars" [showErrorsWhen]="isSubmitted" type="number" label="Stars"></text-input>
+
+            <text-input [control]="fc.imageUrl" [showErrorsWhen]="isSubmitted" label="Image URL"></text-input>
+
+            <text-input [control]="fc.origins" [showErrorsWhen]="isSubmitted" label="Origins"></text-input>
+
+            <text-input [control]="fc.cookTime" [showErrorsWhen]="isSubmitted" label="Cook Time"></text-input>
+
+            <button type="submit" class="submit-button">Save Changes</button>
+
+            <div class="back">
+                <a routerLink="/admin/changeFoodList">Back to Food List</a>
+            </div>
+        </form>
+    </div>
+</div>

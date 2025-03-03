@@ -1,0 +1,77 @@
+/* profile-page.component.css */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f8ff;
+    padding: 0 20px;
+}
+
+.profile-container {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 30px;
+}
+
+.profile-header {
+    background-color: #00695c;
+    color: #ffffff;
+    padding: 25px;
+    border-radius: 20px 20px 0 0;
+}
+
+.profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #b2dfdb;
+    margin: 0 auto 15px;
+}
+
+.user-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.user-info p {
+    margin: 12px 0;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #e0f2f1;
+    border-radius: 8px;
+}
+
+.role {
+    font-style: italic;
+    font-size: 16px;
+    margin-top: -8px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+}
+
+.buttons button {
+    background-color: #00695c;
+    color: white;
+    border: none;
+    padding: 14px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+    background-color: #004d40;
+}

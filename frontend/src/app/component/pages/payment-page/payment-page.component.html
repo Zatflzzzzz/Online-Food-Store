@@ -1,0 +1,27 @@
+<div class="container"*ngIf="currentUser">
+  <div class="content">
+    <app-title title="Order Summary" fontSize="1.6rem"></app-title>
+    <div class="summary">
+      <div class="summary-item">
+        <h3>Name:</h3>
+        <span>{{ order.name }}</span>
+      </div>
+      <div class="summary-item">
+        <h3>Address:</h3>
+        <span>{{ order.address }}</span>
+      </div>
+      <div class="summary-item">
+        <h3>Your current balance:</h3>
+        <span>{{ currentUser.balance | currency }}</span>
+      </div>
+    </div>
+    <order-items-list [order]="order"></order-items-list>
+  </div>
+  <div class="map">
+    <app-title title="Shipping Address" fontSize="1.6rem"></app-title>
+    <map [order]="order" [readonly]="true"></map>
+  </div>
+  <div class="buttons-container">
+    <button class="pay-button" (click)="payForTheOrder()">Pay for the order</button>
+  </div>
+</div>

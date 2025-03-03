@@ -1,0 +1,31 @@
+<div class="container" *ngIf="editForm">
+  <div class="details">
+    <app-title title="Edit User"></app-title>
+    <form [formGroup]="editForm" (ngSubmit)="submit()">
+      <text-input
+        [control]="fc.name"
+        [showErrorsWhen]="isSubmitted"
+        label="Name">
+      </text-input>
+
+      <text-input
+        [control]="fc.email"
+        [showErrorsWhen]="isSubmitted"
+        label="Email"
+        type="email">
+      </text-input>
+
+      <text-input
+        [control]="fc.address"
+        [showErrorsWhen]="isSubmitted"
+        label="Address">
+      </text-input>
+
+      <default-button text="Save Changes"></default-button>
+
+      <div class="back-icon" (click)="goBack()">
+        ← Back
+      </div>
+    </form>
+  </div>
+</div>

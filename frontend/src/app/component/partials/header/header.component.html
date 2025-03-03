@@ -1,0 +1,34 @@
+<header *ngIf="user">
+    <div class="container">
+        <a routerLink="" class="Logo">FoodInHome</a>
+        <nav>
+            <ul>
+                <li *ngIf="user.isAdmin && user.token" class="menu-container">
+                    <a>Admin panel</a>
+                    <div class="menu">
+                        <a routerLink="/admin/changeFoodList">Change food list (delete and edit)</a>
+                        <a routerLink="/admin/changeUserList">Change user list (delete and edit)</a>
+                        <a routerLink="/admin/addFoodList">Add a dish (post)</a>
+                        <a routerLink="/admin/giveAdminRules">Give admin rights to a verified user</a>
+                    </div>   
+                </li>
+                <li *ngIf="!isAuth">
+                    <a routerLink="/login">Login</a>
+                </li>
+                <li *ngIf="user.token" class="menu-container">
+                    <a>{{user.name}}</a>
+                    <div class="menu">
+                        <a routerLink="/profile/{{userId}}" >Profile</a>
+                        <a routerLink="/order_list/{{userId}}">Orders</a>
+                        <a (click)="logout()">Logout</a>
+                    </div>   
+                </li>
+                <li>
+                    <a routerLink="/cart-page" *ngIf="isAuth">
+                        Cart <span *ngIf="cartQuantity">{{cartQuantity}}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

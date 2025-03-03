@@ -1,0 +1,148 @@
+/* Общие стили для контейнера */
+.user-delete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 30px;
+}
+
+/* Карточка пользователя */
+.user-card {
+  background-color: #f7f7f7;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  width: 600px;
+  max-width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Анимация при наведении на карточку */
+.user-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Изображение пользователя */
+.user-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #ff6f61;
+  margin-bottom: 25px;
+  transition: border-color 0.3s ease;
+}
+
+/* Анимация при наведении на изображение */
+.user-photo:hover {
+  border-color: #ff4d4d;
+}
+
+/* Информация о пользователе */
+.user-details {
+  margin-bottom: 30px;
+}
+
+.user-details h2 {
+  margin-bottom: 15px;
+  font-size: 32px;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Анимация при наведении на имя пользователя */
+.user-details h2:hover {
+  color: #ff4d4d;
+}
+
+.user-details p {
+  margin: 10px 0;
+  font-size: 22px;
+  color: #555;
+}
+
+/* Кнопка удаления */
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 35px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Анимация при наведении на кнопку */
+.delete-button:hover {
+  background-color: #e60000;
+  transform: scale(1.1);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+  .user-card {
+    padding: 30px;
+    width: 340px;
+  }
+
+  .user-photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .user-details h2 {
+    font-size: 28px;
+  }
+
+  .user-details p {
+    font-size: 20px;
+  }
+
+  .delete-button {
+    padding: 12px 30px;
+    font-size: 18px;
+  }
+}
+.back {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.back a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.back a:hover {
+  text-decoration: underline;
+}
+button:hover {
+  background-color: #c0392b;
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+  background-color: #a93226;
+}
+
+.back-icon {
+  cursor: pointer;
+  color: #2980b9;
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.back-icon:hover {
+  color: #3498db;
+}

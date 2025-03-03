@@ -1,0 +1,27 @@
+<div *ngIf="food">
+    <div class="delete-container">
+        <div class="food-info">
+          <img [src]="food.imageUrl" [alt]="food.name" class="food-image"/>
+          <div class="food-details">
+            <h3 class="food-name">{{food.name}}</h3>
+            <p class="food-price">{{food.price | currency}}</p>
+            <div class="food-rating">
+              <app-star-rating [starCount]="food.stars" [starSize]="20"></app-star-rating>
+            </div>
+            <div class="food-origins">
+              <span *ngFor="let origin of food.origins">
+                {{origin}}
+              </span>
+            </div>
+            <div class="food-tags">
+              <span *ngFor="let tag of food.tags">
+                {{tag}}
+              </span>
+            </div>
+            <p class="food-cook-time">Cook Time: {{food.cookTime}} minutes</p>
+          </div>
+        </div>
+        <button class="delete-button" (click)="confirmDelete()">Delete food</button>
+    </div>
+</div>
+

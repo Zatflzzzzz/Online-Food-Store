@@ -1,0 +1,26 @@
+.star-rating {
+    display: flex;
+  }
+  
+  .star {
+    width: 25px; /* Размер звезды */
+    height: 25px; /* Размер звезды */
+    color: gold;
+    margin-right: 5px;
+    display:relative; 
+}
+
+.star.half {
+    background-image: linear-gradient(to right, yellow 50%, gray 50%);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.star.empty {
+  color: lightgray;
+}
+  
+  .star.full {
+    color: gold;
+  }

@@ -1,0 +1,16 @@
+<div class="profile-container" *ngIf="currentUser">
+    <div class="profile-header">
+        <img class="profile-img" src="./assets/default-user.jpg"/>
+        <h2>{{ currentUser.name }}</h2>
+        <p class="role">{{ currentUser.isAdmin ? 'Admin' : 'User' }}</p>
+    </div>
+    <div class="user-info">
+        <p><strong>Email:</strong> {{ currentUser.email }}</p>
+        <p><strong>Address:</strong> {{ currentUser.address }}</p>
+        <p><strong>Balance:</strong> ${{ currentUser.balance.toFixed(2) }}</p>
+    </div>
+    <div class="buttons">
+        <button (click)="goToTopUp_page()">Go to top up your balance</button>
+        <button (click)="goToCart_page()">Go to Cart</button>
+    </div>
+</div>

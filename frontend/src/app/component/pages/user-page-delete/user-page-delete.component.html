@@ -1,0 +1,15 @@
+<div class="user-delete-container" *ngIf="user">
+    <div class="user-card">
+      <img src="/assets/default-user.jpg" alt="User Photo" class="user-photo">
+      <div class="user-details">
+        <h2>{{ user.name }}</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+        <p><strong>Admin:</strong> {{ user.isAdmin ? 'Yes' : 'No' }}</p>
+      </div>
+      <button (click)="deleteUserSubmit()" class="delete-button">Delete user</button>
+      <div class="back-icon" (click)="goBack()">
+        ← Back
+      </div>
+    </div>
+</div>

@@ -1,0 +1,162 @@
+/* Основные стили списка */
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  gap: 2rem; /* Добавлено расстояние между карточками */
+}
+
+li {
+  position: relative;
+  margin-bottom: 1.5rem; /* Дополнительное расстояние снизу */
+}
+
+li a {
+  height: 26rem;
+  width: 24rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #333;
+  text-decoration: none;
+  background-color: #fafafa;
+  transition: box-shadow 0.3s ease;
+}
+
+li a:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+img {
+  object-fit: cover;
+  height: 15rem;
+  width: 22.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.content {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.1rem;
+  position: relative;
+  height: 7rem;
+}
+
+.product-item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.origins {
+  flex: 9;
+}
+
+.origins span {
+  border-radius: 2rem;
+  background-color: #f0f0f0;
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-right: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.email {
+  font-size: 1rem;
+  flex: 3;
+  text-align: right;
+}
+
+.role {
+  background: #fff;
+  padding: 0.3rem;
+  color: #414141;
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+  border-radius: 0.5rem;
+}
+
+.role.admin {
+  color: #d32f2f;
+  border: 2px solid #d32f2f;
+}
+
+.role.user {
+  color: #388e3c;
+  border: 2px solid #388e3c;
+}
+
+/* Стили для кнопок действия */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.edit-button,
+.delete-button {
+  width: 48%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Стили для кнопки Edit Data */
+.edit-button {
+  background-color: #0277bd;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #01579b;
+  transform: scale(1.05);
+}
+
+/* Стили для кнопки Delete User */
+.delete-button {
+  background-color: #c62828;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #b71c1c;
+  transform: scale(1.05);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+  li a {
+    height: 25rem;
+    width: 20rem;
+  }
+
+  img {
+    height: 13rem;
+    width: 20rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .edit-button,
+  .delete-button {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+}

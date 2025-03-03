@@ -1,0 +1,35 @@
+<app-search searchContext="search_admin_user"></app-search>
+<app-not-found [visible]="!users || !users.length" resetLinkText="Reset Search"></app-not-found>
+
+<ul>
+  <li *ngFor="let user of users">
+      <img [src]="defaultUserImage" [alt]="user.name" />
+      <div class="content">
+        <div class="name">{{ user.name }}</div>
+        
+        <div class="product-item-footer">
+          <div class="origins">
+            <span>{{ user.address }}</span>
+          </div>
+        </div>
+
+        <div class="email">
+          <span>📧</span>
+          {{ user.email }}
+        </div>
+
+        <div>
+          balance: {{user.balance}}
+        </div>
+      </div>
+
+      <div class="role" [ngClass]="user.isAdmin ? 'admin' : 'user'">
+        <span>{{ user.isAdmin ? 'Admin' : 'User' }}</span>
+      </div>
+
+    <div class="action-buttons">
+      <button class="edit-button" (click)="onEditUser(user.id)">Edit Data</button>
+      <button class="delete-button" (click)="onDeleteUser(user.id)">Delete User</button>
+    </div>
+  </li>
+</ul>

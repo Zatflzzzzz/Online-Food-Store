@@ -1,0 +1,59 @@
+.top-up-container {
+    max-width: 400px;
+    margin: 20px auto; /* Добавляем отступы сверху и снизу */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px; /* Увеличиваем скругление углов */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень для объема */
+    background-color: #f9f9f9; /* Легкий фон для контраста */
+    text-align: center;
+    transition: transform 0.2s ease-in-out; /* Анимация при наведении */
+}
+
+.top-up-container:hover {
+    transform: scale(1.02); /* Легкое увеличение контейнера при наведении */
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px; /* Увеличиваем отступы для удобства */
+    margin: 12px 0; /* Увеличиваем отступы между элементами */
+    border: 1px solid #ccc;
+    border-radius: 6px; /* Скругляем углы инпута */
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
+
+input[type="number"]:focus {
+    border-color: #4CAF50; /* Цвет границы при фокусе */
+    outline: none; /* Убираем стандартный outline */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Добавляем тень при фокусе */
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px; /* Увеличиваем размеры кнопки */
+    border: none;
+    border-radius: 6px; /* Скругляем углы кнопки */
+    cursor: pointer;
+    font-size: 16px; /* Увеличиваем размер шрифта */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Анимация фона и масштабирования */
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px); /* Поднимаем кнопку при наведении */
+}
+
+button:focus {
+    outline: none; /* Убираем стандартный outline */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Добавляем тень при фокусе */
+}
+
+.message {
+    margin-top: 24px; /* Увеличиваем отступ сверху */
+    color: #2e7d32; /* Более насыщенный зеленый цвет */
+    font-size: 14px; /* Увеличиваем размер текста */
+    font-weight: 500; /* Делаем текст полужирным */
+}

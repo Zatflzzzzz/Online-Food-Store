@@ -1,0 +1,44 @@
+<app-search searchContext="search_admin_food"></app-search>
+<app-tags [requestFromAdmin]="true"></app-tags>
+<app-not-found [visible]="!foodList || !foodList.length" resetLinkText="Reset Search"></app-not-found>
+
+<ul>
+    <li *ngFor="let food of foodList">
+        <a routerLink="/food/{{food.id}}">
+            <img [src]="food.imageUrl" [alt]="food.name"/>
+            <div class="content">
+                <div class="name">
+                    {{food.name}}
+                </div>
+                <div class="stars">
+                    <app-star-rating [starCount]='food.stars' [starSize]='24'></app-star-rating>
+                </div>
+                
+                <div class="product-item-footer">
+                    <div class="origins">
+                        <span *ngFor="let origin of food.origins">
+                            {{origin}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="cook-time">
+                    <span>⏲️</span>
+                    {{food.cookTime}} min.
+                </div>
+            </div>
+
+            <div class="price">
+                <span>
+                    {{food.price | currency}}
+                </span>
+            </div>
+        </a>
+
+        <div class="action-buttons">
+            <button (click)="onEdit(food.id)">edit</button>
+            <button (click)="onDelete(food.id)">delete</button>
+        </div>
+    </li>
+</ul>
+    

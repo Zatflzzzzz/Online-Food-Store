@@ -1,0 +1,61 @@
+.edit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background-color: #f0f4f8;
+    padding: 2rem;
+}
+
+.edit-details {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 700px;
+}
+
+.edit-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #27ae60;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #2ecc71;
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    background-color: #1e8449;
+    transform: translateY(0);
+}
+
+.back {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.back a {
+    color: #2980b9;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.back a:hover {
+    color: #3498db;
+}

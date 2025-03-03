@@ -1,0 +1,11 @@
+<div class="star-rating">
+  <ng-container *ngFor="let star of array_stars">
+    <div class="star" [ngClass]="{
+          'full': star === 1,
+          'half': star === 0.5,
+          'empty': star === 0
+        }" 
+        [ngStyle]="{'font-size': starSize+'px'}">★
+    </div>
+  </ng-container>
+</div>

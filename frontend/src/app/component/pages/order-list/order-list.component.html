@@ -1,0 +1,44 @@
+<div class="order-list-container" *ngIf="order_list && order_list.length > 0; else noOrders">
+  <header>
+    <h1>Your Orders</h1>
+  </header>
+  <section class="order-cards">
+    <article class="order-card" *ngFor="let order of order_list">
+      <h2>Order Details</h2>
+      <div class="order-details">
+        <div class="order-info">
+          <p><strong>Name:</strong> {{ order.name }}</p>
+          <p><strong>Address:</strong> {{ order.address }}</p>
+          <p><strong>Total Price:</strong> ${{ order.totalPrice.toFixed(2) }}</p>
+          <p><strong>Status:</strong> <span class="status">{{ order.status }}</span></p>
+          <p><strong>Created At:</strong> {{ order.createdAt | date:'mediumDate' }} at {{ order.createdAt | date:'shortTime' }}</p>
+          <button (click)="navigateToOrder(order.id)">View Order</button>
+        </div>
+        <div class="order-items">
+          <h3>Items:</h3>
+          <ul>
+            <li *ngFor="let item of order.items">
+              <div class="item-details">
+                <img [src]="item.food.imageUrl" alt="{{ item.food.name }}">
+                <div class="item-info">
+                  <span>{{ item.food.name }}</span> - Quantity: {{ item.quantity }}
+                  <p><strong>Price:</strong> ${{ item.food.price.toFixed(2) }}</p>
+                  <p><strong>Tags:</strong> {{ item.food.tags.join(', ') }}</p>
+                  <p><strong>Favorite:</strong> {{ item.food.favorite ? 'Yes' : 'No' }}</p>
+                  <p><strong>Stars:</strong> {{ item.food.stars }}</p>
+                  <p><strong>Origins:</strong> {{ item.food.origins.join(', ') }}</p>
+                  <p><strong>Cook Time:</strong> {{ item.food.cookTime }} mins</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
+<ng-template #noOrders>
+  <div class="no-orders-container">
+    <p>You have no orders yet.</p>
+  </div>
+</ng-template>
